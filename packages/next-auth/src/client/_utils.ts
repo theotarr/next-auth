@@ -37,8 +37,8 @@ export async function fetchData<T = any>(
 ): Promise<T | null> {
   try {
     const options = req?.headers.cookie
-      ? { headers: { cookie: req.headers.cookie } }
-      : {}
+      ? { headers: { cookie: req.headers.cookie, credentials: 'include' } }
+      : { headers: { credentials: 'include' } }
     const res = await fetch(`${apiBaseUrl(__NEXTAUTH)}/${path}`, options)
     const data = await res.json()
     if (!res.ok) throw data
